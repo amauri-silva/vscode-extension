@@ -13,8 +13,8 @@
   "main": "./extension.js",
   "contributes": {
     "commands": [{
-      "command": "jas-plus-editor.helloWorld",
-      "title": "Hello World"
+      "command": "jas-plus-editor.as-bundler",
+      "title": "AS Bundler"
     }]
   },
   "scripts": {
