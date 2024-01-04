@@ -10,7 +10,7 @@ function activate(context) {
 
 	console.log('Congratulations, your extension "AS Bundler" is now active!');
 
-	let disposable = vscode.commands.registerCommand('jas-plus-editor.as-bundler', function () {
+	let disposable = vscode.commands.registerCommand('jas-plus-editor.as-bundler', async function () {
 
 		const activeEditor = vscode.window.activeTextEditor
 		const filePropertiesExtension = activeEditor.document.fileName.endsWith(".properties");
@@ -18,15 +18,12 @@ function activate(context) {
 
 			vscode.window.showInformationMessage('Hello World from AS Bundler!');
 
-			//const document = activeEditor.document;
 			var firstLine = activeEditor.document.lineAt(0);
 			var lastLine = activeEditor.document.lineAt(activeEditor.document.lineCount - 1);
 
 
 
 			const fullPropertiesContent = activeEditor.document.getText(new vscode.Range(firstLine.range.start, lastLine.range.end));
-			// console.log(" Inside de IF fileTextToCursor @@@@@ #####################################: " + fullPropertiesContent);
-			// console.log(typeof fullPropertiesContent);
 
 
 			//=====================================================================
@@ -125,40 +122,30 @@ function activate(context) {
 			finalListParameters.sort();
 			finalListParameters.forEach((aa) => {
 				
-				// console.log(" TEST  AAAAAAAAAAAAAAAAAAAAAAAAAAAAA  " + aa);
 			});
 			
-			
-			// Clean the ActiveTextEditor
-			const selection = activeEditor.selection;
-			activeEditor.edit(builder => {
-				// vscode.commands.executeCommand('editor.action.selectAll');
-				// vscode.commands.executeCommand('editor.action.deleteLines');
-				//vscode.commands.executeCommand('editor.action.clipboardCutAction');
-				
-				
-				// vscode.commands.executeCommand('editor.action.insertLineBefore');
-				builder.insert(new vscode.Position(0, activeEditor.document.lineCount - 1), "Amauri is the best for sure!");
-				// builder.insert(activeEditor.selection.active,"Amauri is the best for sure!");
-				// builder.replace(selection,"Amauri is the best for sure!");
-				
-				console.log(" TEST  AAAAAAAAAAAAAAAAAAAAAAAAAAAAA  " + activeEditor.document.fileName);
-				// const aa = "Amauri is the best for sure!";
-				// const workEdits = new vscode.WorkspaceEdit();
-                // workEdits.set(activeEditor.document.uri, finalListParameters); // give the edits
-                // vscode.workspace.applyEdit(workEdits); // apply the edits
-				
-				
-				// Put all parameters line back to the open editor
-				
-				// Salve all changes
-				vscode.commands.executeCommand('workbench.action.files.saveAll');
+			// select all the text and run formatSelection
+			await vscode.commands.executeCommand('editor.action.selectAll');
+			await vscode.commands.executeCommand('editor.action.deleteLines');
+			await vscode.commands.executeCommand('cancelSelection')
+			await vscode.commands.executeCommand('workbench.action.files.saveAll');
+		
+			activeEditor.edit(async builder => {
+				// select all the text and run formatSelection
+				builder.insert(new vscode.Position(10, 0), "Amauri is the best for sureAAAAAAAAAAAAAAAAAa!");
+				await vscode.commands.executeCommand('editor.action.selectAll');
+				await vscode.commands.executeCommand('cancelSelection')
+				await vscode.commands.executeCommand('workbench.action.files.saveAll');
 			})
-
-	
+			
+			
+			
+			
+			
 		}
 	});
 }
+
 
 // This method is called when your extension is deactivated
 function deactivate() {
@@ -169,3 +156,4 @@ module.exports = {
 	activate,
 	deactivate
 }
+
