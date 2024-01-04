@@ -112,29 +112,30 @@ function activate(context) {
 					});
 
 				} else {
-					// TODOOOOOO
+					
 					let paramFormatted = arrayParameter[0];
-					paramFormatted = arrayParameter.slice(0, arrayParameter.indexOf(","));
-					finalListParameters.push(paramFormatted);
+					// paramFormatted = arrayParameter[0];
+					finalListParameters.push(paramFormatted.replace(",", ""));
 				}
 			});
 			
+			var stringTest = "";
 			finalListParameters.sort();
 			finalListParameters.forEach((aa) => {
 				
+				stringTest += aa + "\n"
 			});
 			
 			// select all the text and run formatSelection
 			await vscode.commands.executeCommand('editor.action.selectAll');
 			await vscode.commands.executeCommand('editor.action.deleteLines');
 			await vscode.commands.executeCommand('cancelSelection')
-			await vscode.commands.executeCommand('workbench.action.files.saveAll');
+			// await vscode.commands.executeCommand('workbench.action.files.saveAll');
 		
+
 			activeEditor.edit(async builder => {
-				// select all the text and run formatSelection
-				builder.insert(new vscode.Position(10, 0), "Amauri is the best for sureAAAAAAAAAAAAAAAAAa!");
-				await vscode.commands.executeCommand('editor.action.selectAll');
-				await vscode.commands.executeCommand('cancelSelection')
+				builder.insert(new vscode.Position(0, 0), stringTest);
+
 				await vscode.commands.executeCommand('workbench.action.files.saveAll');
 			})
 			
