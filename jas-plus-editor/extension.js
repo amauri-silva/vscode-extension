@@ -27,7 +27,7 @@ function activate(context) {
 
 
 			//=====================================================================
-			var myArray = [];
+			var fullListOfParameters = [];
 			var finalListParameters = [];
 			var map = new Map();
 			let lastGroupOfParameter = "";
@@ -40,24 +40,25 @@ function activate(context) {
 				var firstLine = activeEditor.document.lineAt(i);
 				const content = activeEditor.document.getText(new vscode.Range(firstLine.range.start, firstLine.range.end));
 				if (content != "") {
-					myArray.push(content);
+					fullListOfParameters.push(content);
 					const correntGroupOfParameter = content.substring(0, content.indexOf("."));
 				}
 				i++;
 			}
 			while (i < size)
 			//console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@  "+ myArray[myArray.length -1]);
-			myArray.sort();
 			//console.log("WWWWWWWWWWWWWWWWWWWWWWWWW  "+ myArray);
-
 			//myArray2.sort();
-
-
-			//=====================================================================
 			//Get the group of each line/parameter
 			var mapFull = new Map();
 			var paramList = [];
-			myArray.forEach((element) => {
+			var mapTow = new Map();
+
+
+			mapTow = hashtagRule(fullListOfParameters);
+
+			fullListOfParameters.sort();
+			fullListOfParameters.forEach((element) => {
 
 				const groupOfParameter = element.substring(0, element.indexOf("."));
 
@@ -112,41 +113,65 @@ function activate(context) {
 					});
 
 				} else {
-					
+					// ## TODO #####################
 					let paramFormatted = arrayParameter[0];
 					// paramFormatted = arrayParameter[0];
 					finalListParameters.push(paramFormatted.replace(",", ""));
 				}
 			});
-			
+
 			var stringTest = "";
 			finalListParameters.sort();
 			finalListParameters.forEach((aa) => {
-				
+
 				stringTest += aa + "\n"
 			});
-			
+
 			// select all the text and run formatSelection
 			await vscode.commands.executeCommand('editor.action.selectAll');
 			await vscode.commands.executeCommand('editor.action.deleteLines');
 			await vscode.commands.executeCommand('cancelSelection')
 			// await vscode.commands.executeCommand('workbench.action.files.saveAll');
-		
+
 
 			activeEditor.edit(async builder => {
 				builder.insert(new vscode.Position(0, 0), stringTest);
 
 				await vscode.commands.executeCommand('workbench.action.files.saveAll');
 			})
-			
-			
-			
-			
-			
+
+
+
+
+
 		}
 	});
 }
+/**
+ * Return a Map with a list of parameters that cotains comments
+ * 
+ * @param {string[]} listOfParameters
+ */
+function hashtagRule(listOfParameters) {
+	var mapOfHashTagByGroup = new Map();
+	var hashTagListByGroup = [];
+	var groupOfParameter;
+	var lasParameterHashtag = false;
 
+	listOfParameters.forEach((element) => {
+	
+		if (element.startsWith("#")) {
+			hashTagListByGroup.push(element);
+			lasParameterHashtag = true;
+		} else if (lasParameterHashtag) {
+			groupOfParameter = element.substring(0, element.indexOf("."));
+			mapOfHashTagByGroup.set(groupOfParameter, hashTagListByGroup);
+			lasParameterHashtag = false;
+		}
+	});
+
+	return mapOfHashTagByGroup;
+}
 
 // This method is called when your extension is deactivated
 function deactivate() {
