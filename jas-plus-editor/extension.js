@@ -121,29 +121,37 @@ function activate(context) {
 
 			var finalBlockOfParameters = "\n";
 			var hashTagtest = "";
+			var lastParam = "";
 			finalListParameters.sort();
-			finalListParameters.forEach((element) => {
+			finalListParameters.forEach((parameter) => {
 
-				console.log("WWWWWWWWWWWWWWWWWW " + element);
-				const correntGroupOfParameter = element.substring(0, element.indexOf("."));
+				console.log("WWWWWWWWWWWWWWWWWW " + parameter);
 
-				// hashTagtest = addHashTagToParameter(element, mapTwo);
-
+				
+				// hashTagtest = addHashTagToParameter(parameter, mapTwo);
+				
 				var hashtagGroup = "";
-				var paramNameOfHashtag = element.substring(0, element.indexOf("."));
+				var currentParam = parameter.substring(0, parameter.indexOf("."));
+				
+				if(lastParam.length > 0 && currentParam != lastParam){
+					finalBlockOfParameters += "\n";
+				}
+
 				mapTwo.forEach((arrayHashtag, key) => {
-					if (key.includes(paramNameOfHashtag)) {
-						arrayHashtag.forEach((element => {
-							finalBlockOfParameters += element + "\n"
+					// finalBlockOfParameters += "\n"
+					if (key.includes(currentParam)) {
+						arrayHashtag.forEach((comment => {
+							finalBlockOfParameters += comment + "\n"
 						}))
 						mapTwo.delete(key);
 					}
-					// finalBlockOfParameters += element + "\n"
+					// finalBlockOfParameters += parameter + "\n"
 				});
-
+				
 				// console.log("ffffffffffffffffffff "+ hashtagGroup);
 				// console.log("AAAAA9999999999999 " + hashTagtest);
-				finalBlockOfParameters += element + "\n"
+				finalBlockOfParameters += parameter + "\n"
+				lastParam = currentParam;
 			});
 
 			// select all the text and run formatSelection
@@ -193,25 +201,6 @@ function hashtagRule(listOfParameters) {
 	return mapOfHashTagByGroup;
 }
 
-function addHashTagToParameter(parameter, mapOfHash) {
-	var hashtagGroup = "";
-	var newMap = new Map(Object.entries(mapOfHash));
-	console.log("AAAAAAAAAAAAAAAAA  " + typeof(newMap))
-	newMap.set(mapOfHash);
-	var paramNameOfHashtag = parameter.substring(0, parameter.indexOf("."));
-	newMap.forEach((arrayHashtag, key) => {
-		if (parameter.includes(paramNameOfHashtag)) {
-			arrayHashtag.forEach((element => {
-				// console.log("AAAAA9999999999999 " + element)
-				hashtagGroup += element;
-				hashtagGroup.concat("\r\n");
-			}))
-		}
-		newMap.delete(key);
-	});
-
-	return hashtagGroup;
-}
 
 // This method is called when your extension is deactivated
 function deactivate() {
