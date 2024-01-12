@@ -41,7 +41,6 @@ function activate(context) {
 				const content = activeEditor.document.getText(new vscode.Range(firstLine.range.start, firstLine.range.end));
 				if (content != "") {
 					fullListOfParameters.push(content);
-					const correntGroupOfParameter = content.substring(0, content.indexOf("."));
 				}
 				i++;
 			}
@@ -52,20 +51,22 @@ function activate(context) {
 			//Get the group of each line/parameter
 			var mapFull = new Map();
 			var paramList = [];
-			var mapTow = new Map();
+			var mapTwo = new Map();
 
-
-			mapTow = hashtagRule(fullListOfParameters);
+			//Get all line of hastag and group them by catagory
+			mapTwo = hashtagRule(fullListOfParameters);
 
 			fullListOfParameters.sort();
-			fullListOfParameters.forEach((element) => {
+
+			var fullListOfParametersWithOutHastag = fullListOfParameters.filter(element => !element.startsWith("#"))
+
+			fullListOfParametersWithOutHastag.forEach((element) => {
 
 				const groupOfParameter = element.substring(0, element.indexOf("."));
 
 				if (mapFull.has(groupOfParameter)) {
 
 					paramList.push(element);
-					//console.log(" groupOfParameter  QQQQQQQQQQQQQQQQQQQQQQQQQ  " + paramList);
 					mapFull.set(groupOfParameter, paramList);
 
 				} else {
@@ -113,18 +114,36 @@ function activate(context) {
 					});
 
 				} else {
-					// ## TODO #####################
 					let paramFormatted = arrayParameter[0];
-					// paramFormatted = arrayParameter[0];
-					finalListParameters.push(paramFormatted.replace(",", ""));
+					finalListParameters.push(paramFormatted);
 				}
 			});
 
-			var stringTest = "";
+			var finalBlockOfParameters = "\n";
+			var hashTagtest = "";
 			finalListParameters.sort();
-			finalListParameters.forEach((aa) => {
+			finalListParameters.forEach((element) => {
 
-				stringTest += aa + "\n"
+				console.log("WWWWWWWWWWWWWWWWWW " + element);
+				const correntGroupOfParameter = element.substring(0, element.indexOf("."));
+
+				// hashTagtest = addHashTagToParameter(element, mapTwo);
+
+				var hashtagGroup = "";
+				var paramNameOfHashtag = element.substring(0, element.indexOf("."));
+				mapTwo.forEach((arrayHashtag, key) => {
+					if (key.includes(paramNameOfHashtag)) {
+						arrayHashtag.forEach((element => {
+							finalBlockOfParameters += element + "\n"
+						}))
+						mapTwo.delete(key);
+					}
+					// finalBlockOfParameters += element + "\n"
+				});
+
+				// console.log("ffffffffffffffffffff "+ hashtagGroup);
+				// console.log("AAAAA9999999999999 " + hashTagtest);
+				finalBlockOfParameters += element + "\n"
 			});
 
 			// select all the text and run formatSelection
@@ -135,7 +154,7 @@ function activate(context) {
 
 
 			activeEditor.edit(async builder => {
-				builder.insert(new vscode.Position(0, 0), stringTest);
+				builder.insert(new vscode.Position(0, 0), finalBlockOfParameters);
 
 				await vscode.commands.executeCommand('workbench.action.files.saveAll');
 			})
@@ -159,7 +178,7 @@ function hashtagRule(listOfParameters) {
 	var lasParameterHashtag = false;
 
 	listOfParameters.forEach((element) => {
-	
+
 		if (element.startsWith("#")) {
 			hashTagListByGroup.push(element);
 			lasParameterHashtag = true;
@@ -167,10 +186,31 @@ function hashtagRule(listOfParameters) {
 			groupOfParameter = element.substring(0, element.indexOf("."));
 			mapOfHashTagByGroup.set(groupOfParameter, hashTagListByGroup);
 			lasParameterHashtag = false;
+			hashTagListByGroup = [];
 		}
 	});
 
 	return mapOfHashTagByGroup;
+}
+
+function addHashTagToParameter(parameter, mapOfHash) {
+	var hashtagGroup = "";
+	var newMap = new Map(Object.entries(mapOfHash));
+	console.log("AAAAAAAAAAAAAAAAA  " + typeof(newMap))
+	newMap.set(mapOfHash);
+	var paramNameOfHashtag = parameter.substring(0, parameter.indexOf("."));
+	newMap.forEach((arrayHashtag, key) => {
+		if (parameter.includes(paramNameOfHashtag)) {
+			arrayHashtag.forEach((element => {
+				// console.log("AAAAA9999999999999 " + element)
+				hashtagGroup += element;
+				hashtagGroup.concat("\r\n");
+			}))
+		}
+		newMap.delete(key);
+	});
+
+	return hashtagGroup;
 }
 
 // This method is called when your extension is deactivated
