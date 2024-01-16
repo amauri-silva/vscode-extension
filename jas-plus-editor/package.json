@@ -1,7 +1,7 @@
 {
   "name": "jas-plus-editor",
   "displayName": "jas-plus editor",
-  "description": "A test extention",
+  "description": "A resource bundle extention",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.84.0"
