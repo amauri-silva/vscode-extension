@@ -184,14 +184,7 @@ function hashtagRule(listOfParameters) {
 	return mapOfHashTagByGroup;
 }
 
-
-// This method is called when your extension is deactivated
-function deactivate() {
-	console.log('deactivate')
-}
-
 module.exports = {
-	activate,
-	deactivate
+	activate
 }
 

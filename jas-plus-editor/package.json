@@ -2,6 +2,7 @@
   "name": "jas-plus-editor",
   "displayName": "jas-plus editor",
   "description": "A resource bundle extention",
+  "publisher": "ASBundler",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.84.0"
