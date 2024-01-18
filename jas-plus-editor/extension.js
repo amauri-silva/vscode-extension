@@ -10,7 +10,7 @@ function activate(context) {
 
 	console.log('The extension of "AS Bundler" was executed!');
 
-	vscode.commands.registerCommand('jas-plus-editor.as-bundler', async function () {
+	vscode.commands.registerCommand('as-bundler-editor.as-bundler', async function () {
 
 		const activeEditor = vscode.window.activeTextEditor
 		const filePropertiesExtension = activeEditor.document.fileName.endsWith(".properties");

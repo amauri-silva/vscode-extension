@@ -1,9 +1,9 @@
 {
-  "name": "jas-plus-editor",
-  "displayName": "jas-plus editor",
-  "description": "A resource bundle extention",
+  "name": "as-bundler-editor",
+  "displayName": "AS Bundler",
+  "description": "A resource bundle for VsCode. Makes it easy to manage all parameters into .properties files.",
   "publisher": "ASBundler",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.84.0"
   },
@@ -14,7 +14,7 @@
   "main": "./extension.js",
   "contributes": {
     "commands": [{
-      "command": "jas-plus-editor.as-bundler",
+      "command": "as-bundler-editor.as-bundler",
       "title": "AS Bundler"
     }]
   },

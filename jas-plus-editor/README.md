@@ -1,3 +1,3 @@
-# jas-plus-editor README
+# as-bundler-editor README
 
 This is an resource bundler for VsCode IDE
