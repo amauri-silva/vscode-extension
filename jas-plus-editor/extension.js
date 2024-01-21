@@ -1,7 +1,7 @@
 
 const vscode = require('vscode');
 
-// This method is called when your extension is activated
+// This method is called when the extension is activated
 // Your extension is activated the very first time the command is executed
 /**
  * @param {vscode.ExtensionContext} context
@@ -46,7 +46,7 @@ function activate(context) {
 			fullListOfParameters.sort();
 
 			// TODO ----------------------------------------------------------------------------------------------------------
-			var fullListOfParametersWithOutHastag = fullListOfParameters.filter(element => !element.startsWith("#"))
+			var fullListOfParametersWithOutHastag = fullListOfParameters.filter(element => !element.startsWith("#") && !element.startsWith("//"))
 
 			fullListOfParametersWithOutHastag.forEach((element) => {
 
@@ -118,30 +118,29 @@ function activate(context) {
 			// TODO ----------------------------------------------------------------------------------------------------------
 			var finalBlockOfParameters = "\n";
 			var hashTagtest = "";
+			var currentParam = "";
 			var lastParam = "";
+			var arrayHashtag = [];
 			finalListParameters.sort();
 			finalListParameters.forEach((parameter) => {
-				var currentParam = parameter.substring(0, parameter.indexOf("."));
+				currentParam = parameter.substring(0, parameter.indexOf("="));
+				currentParam = currentParam.split(" ").join("");
 				
-				if(lastParam.length > 0 && currentParam != lastParam){
+				var paramInitialGroup = currentParam.substring(0, currentParam.indexOf("."));
+				if (lastParam.length > 0 && paramInitialGroup != lastParam) {
 					finalBlockOfParameters += "\n";
 				}
 
-				groupOfComments.forEach((arrayHashtag, key) => {
-					// finalBlockOfParameters += "\n"
-					if (key.includes(currentParam)) {
-						arrayHashtag.forEach((comment => {
-							finalBlockOfParameters += comment + "\n"
-						}))
-						groupOfComments.delete(key);
-					}
-				});
-				finalBlockOfParameters += parameter + "\n"
-				lastParam = currentParam;
+				if (groupOfComments.has(currentParam)) {
+					arrayHashtag = groupOfComments.get(currentParam);
+					arrayHashtag.forEach((comment) => {
+						finalBlockOfParameters += comment + "\n"
+					});
+				}
+				finalBlockOfParameters += parameter + "\n";
+				lastParam = paramInitialGroup;
 			});
 			// END ----------------------------------------------------------------------------------------------------------
-
-
 
 
 			// select all the text and run formatSelection
@@ -164,6 +163,8 @@ function activate(context) {
  */
 function hashtagRule(listOfParameters) {
 	var mapOfHashTagByGroup = new Map();
+	var finalMapOfComments = new Map();
+	var lastParameter = "";
 	var hashTagListByGroup = [];
 	var groupOfParameter;
 	var lasParameterHashtag = false;
@@ -174,14 +175,16 @@ function hashtagRule(listOfParameters) {
 			hashTagListByGroup.push(element);
 			lasParameterHashtag = true;
 		} else if (lasParameterHashtag) {
-			groupOfParameter = element.substring(0, element.indexOf("."));
-			mapOfHashTagByGroup.set(groupOfParameter, hashTagListByGroup);
+			groupOfParameter = element.substring(0, element.indexOf("="));
+			mapOfHashTagByGroup.set(groupOfParameter.split(" ").join(""), hashTagListByGroup);
 			lasParameterHashtag = false;
 			hashTagListByGroup = [];
 		}
 	});
 
-	return mapOfHashTagByGroup;
+	var mapOfHashTagByGroupSorted = new Map([...mapOfHashTagByGroup.entries()].sort());
+
+	return mapOfHashTagByGroupSorted;
 }
 
 module.exports = {

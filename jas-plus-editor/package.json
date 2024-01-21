@@ -3,7 +3,7 @@
   "displayName": "AS Bundler",
   "description": "A resource bundle for VsCode. Makes it easy to manage all parameters into .properties files.",
   "publisher": "ASBundler",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.84.0"
   },
