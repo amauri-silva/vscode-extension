@@ -3,6 +3,15 @@
 This is a resource bundler for [VS Code IDE](https://code.visualstudio.com/)<br>
 An easy alternantive to organaize all parameters within _.properties_  files in an _alphabetical order_.
 
+**Before**
+
+![Tux, the Linux mascot](https://github.com/amauri-silva/vscode-extension/blob/dev/properties-bundle/vsc-extension/jas-plus-editor/images/before.png?raw=true)
+
+**After**
+
+![properties organaized](https://github.com/amauri-silva/vscode-extension/blob/dev/properties-bundle/vsc-extension/jas-plus-editor/images/after.png?raw=true)
+
+
 ## Getting Started
 **First step** - _Install the extension_
 
@@ -17,23 +26,13 @@ An easy alternantive to organaize all parameters within _.properties_  files in 
 **It done!**<br>
 All the parameters was put in alphabetical order.<br><br>
 
-Before
-\!\[feature X\]\(images/before.png\)
 
-After
+> **WARNING!** <br>This current version was tested only in _Windows_ and _Linux_ invironment, _MacOS_ maybe not work.
 
-> **WARNING!** <br>This current version was tested only in _Windows_ and _Linux_ invironment, _MacOS_ maybe not work.<br><br>
-
+<br>
 
 ## Release Notes
 
 Initial release: **0.0.3**
 
-
----
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
