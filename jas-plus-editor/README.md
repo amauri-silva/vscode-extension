@@ -1,7 +1,7 @@
-# Manage properites automatic
+# Manage properites easily
 
 This is a resource bundler for [VS Code IDE](https://code.visualstudio.com/)<br>
-An easy alternantive to organaize all parameters withing .properties files in an alphabetical order.
+An easy alternantive to organaize all parameters withing _.properties_  files in an _alphabetical order_.
 
 ## Getting Started
 **First step** - _Install the extension_
