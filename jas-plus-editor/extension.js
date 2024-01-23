@@ -39,6 +39,7 @@ function activate(context) {
 			var mapOfParameters = new Map();
 			var paramList = [];
 			var groupOfComments = new Map();
+			var parameterLine = "";
 
 			//Get all line of hastag and group them by catagory
 			groupOfComments = hashtagRule(fullListOfParameters);
@@ -53,13 +54,14 @@ function activate(context) {
 				const groupOfParameter = element.substring(0, element.indexOf("."));
 
 				if (mapOfParameters.has(groupOfParameter)) {
-
-					paramList.push(element);
+					parameterLine = removeEmptySpace(element);
+					paramList.push(parameterLine);
 					mapOfParameters.set(groupOfParameter, paramList);
 
 				} else {
 					paramList = [];
-					paramList.push(element);
+					parameterLine = removeEmptySpace(element);
+					paramList.push(parameterLine);
 					mapOfParameters.set(groupOfParameter, paramList);
 				}
 			});
@@ -125,7 +127,7 @@ function activate(context) {
 			finalListParameters.forEach((parameter) => {
 				currentParam = parameter.substring(0, parameter.indexOf("="));
 				currentParam = currentParam.split(" ").join("");
-				
+
 				var paramInitialGroup = currentParam.substring(0, currentParam.indexOf("."));
 				if (lastParam.length > 0 && paramInitialGroup != lastParam) {
 					finalBlockOfParameters += "\n";
@@ -155,6 +157,16 @@ function activate(context) {
 			})
 		}
 	});
+}
+
+/**
+ * @param {string} element
+ */
+function removeEmptySpace(element) {
+	if (element.endsWith(" ")) {
+		element = element.trim();
+	}
+	return element;
 }
 /**
  * Return a Map with a list of parameters that cotains comments
