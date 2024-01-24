@@ -10,7 +10,7 @@ function activate(context) {
 
 	console.log('The extension of "AS Bundler" was executed!');
 
-	vscode.commands.registerCommand('as-bundler-editor.as-bundler', async function () {
+		vscode.commands.registerCommand('as-bundler-editor.as-bundler', async function () {
 
 		const activeEditor = vscode.window.activeTextEditor
 		const filePropertiesExtension = activeEditor.document.fileName.endsWith(".properties");
@@ -54,13 +54,13 @@ function activate(context) {
 				const groupOfParameter = element.substring(0, element.indexOf("."));
 
 				if (mapOfParameters.has(groupOfParameter)) {
-					parameterLine = removeEmptySpace(element);
+					parameterLine = treatParameter(element);
 					paramList.push(parameterLine);
 					mapOfParameters.set(groupOfParameter, paramList);
 
 				} else {
 					paramList = [];
-					parameterLine = removeEmptySpace(element);
+					parameterLine = treatParameter(element);
 					paramList.push(parameterLine);
 					mapOfParameters.set(groupOfParameter, paramList);
 				}
@@ -162,12 +162,23 @@ function activate(context) {
 /**
  * @param {string} element
  */
-function removeEmptySpace(element) {
+function treatParameter(element) {
 	if (element.endsWith(" ")) {
 		element = element.trim();
 	}
+	element = putSpaceBetweenEqualSymbol(element);
+
 	return element;
 }
+
+/**
+ * @param {string} element
+ */
+function putSpaceBetweenEqualSymbol(element) {
+	return element.split("=").join(" = ");
+}
+
+
 /**
  * Return a Map with a list of parameters that cotains comments
  * 

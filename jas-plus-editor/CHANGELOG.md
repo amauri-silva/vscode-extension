@@ -6,5 +6,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## Added
 
-- Initial release
+Bug fix
+### 0.0.5
+
+Bug fix
+### 0.0.4
+
+Initial release
 ### 0.0.3
