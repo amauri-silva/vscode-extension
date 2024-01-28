@@ -1,7 +1,7 @@
 # Manage properties easily
 
 This is a resource bundler for [VS Code IDE](https://code.visualstudio.com/)<br>
-An easy alternantive to organaize all parameters within _.properties_  files in an _alphabetical order_.
+An easy alternantive to organaize all parameters within **_.properties_**  files (only) in an _alphabetical order_.
 
 **Before**
 
@@ -15,24 +15,17 @@ An easy alternantive to organaize all parameters within _.properties_  files in 
 ## Getting Started
 **First step** - _Install the extension_
 
-* Press `Ctrl+Shit+X` and type **_AS Bundler_** and click in _`Install`_
+* Press `Ctrl+Shift+X` (_Windows/Linux_) or `Cmd+Shift+X` (_macOS_) and type **_AS Bundler_** and click in _`Install`_
 
-**Second step** - _Open your propertie file_
+**Second step** - _Open your properties file_ <br>
+* **_Warning!_** _The current version of this plugin works only for files with .properties extention_)
 
 **Third step** - _Run the extension_
 
-* Press `Ctrl+Shift+P` and type: **_AS Bundler_**
+* Press `Ctrl+Shift+P` (_Windows/Linux_) or `Cmd+Shift+P`(_macOS_) and type: **_AS Bundler_**
 
 **It done!**<br>
 All the parameters was put in alphabetical order.<br><br>
 
-
-> **WARNING!** <br>This current version was tested only in _Windows_ and _Linux_ invironment, _MacOS_ maybe not work.
-
-<br>
-
-## Release Notes
-
-Initial release: **0.0.3**
 
 

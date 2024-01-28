@@ -6,6 +6,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## Added
 
+Update the readme file 
+### 0.0.6
+
 Bug fix
 ### 0.0.5
 
