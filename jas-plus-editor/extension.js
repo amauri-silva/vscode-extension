@@ -166,7 +166,8 @@ function treatParameter(element) {
 	if (element.endsWith(" ")) {
 		element = element.trim();
 	}
-	element = putSpaceBetweenEqualSymbol(element);
+	// TODO - There is a bug 
+	// element = putSpaceBetweenEqualSymbol(element);
 
 	return element;
 }
