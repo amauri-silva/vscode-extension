@@ -1,15 +1,9 @@
 # Manage properties easily
 
-This is a resource bundler for [VS Code IDE](https://code.visualstudio.com/)<br>
+This is a resource bundle for [VS Code IDE](https://code.visualstudio.com/)<br>
 An easy alternantive to organaize all parameters within **_.properties_**  files (only) in an _alphabetical order_.
 
-**Before**
-
-![Tux, the Linux mascot](https://github.com/amauri-silva/vscode-extension/blob/dev/properties-bundle/vsc-extension/jas-plus-editor/images/before.png?raw=true)
-
-**After**
-
-![properties organaized](https://github.com/amauri-silva/vscode-extension/blob/dev/properties-bundle/vsc-extension/jas-plus-editor/images/after.png?raw=true)
+> NOTE:    _The current version of this plugin works only for **VsCode 1.84.0** or **higher**_. If needed, please update your VsCode in order to install the extension.
 
 
 ## Getting Started
@@ -26,6 +20,17 @@ An easy alternantive to organaize all parameters within **_.properties_**  files
 
 **It done!**<br>
 All the parameters was put in alphabetical order.<br><br>
+
+**Before**
+
+![Tux, the Linux mascot](https://github.com/amauri-silva/vscode-extension/blob/dev/properties-bundle/vsc-extension/jas-plus-editor/images/before.png?raw=true)
+
+**After**
+
+![properties organaized](https://github.com/amauri-silva/vscode-extension/blob/dev/properties-bundle/vsc-extension/jas-plus-editor/images/after.png?raw=true)
+
+
+
 
 
 

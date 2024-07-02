@@ -5,7 +5,7 @@ All notable changes to the "as-bundler-editor" extension will be documented in t
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## Added
-Bug fix - unnecessary space between and after equals symbol
+Bug fix - removing unnecessary space between and after equals symbol
 ### 0.0.7
 
 Update the readme file 
