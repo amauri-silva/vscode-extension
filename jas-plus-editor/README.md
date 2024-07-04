@@ -1,7 +1,11 @@
 # Manage properties easily
 
-This is a resource bundle for [VS Code IDE](https://code.visualstudio.com/)<br>
+A resource bundle for [VS Code IDE](https://code.visualstudio.com/)<br>
+
 ![notes](https://github.com/amauri-silva/vscode-extension/blob/dev/properties-bundle/vsc-extension/jas-plus-editor/images/notes.png?raw=true)
+
+
+An easy alternantive to organaize all parameters in an alphabetical order.
 
 ![important ](https://github.com/amauri-silva/vscode-extension/blob/dev/properties-bundle/vsc-extension/jas-plus-editor/images/important.png?raw=true)
 
