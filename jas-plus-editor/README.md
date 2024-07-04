@@ -7,7 +7,7 @@ A resource bundle for [VS Code IDE](https://code.visualstudio.com/)<br>
 
 An easy alternantive to organaize all parameters in an alphabetical order.
 
-![important ](https://github.com/amauri-silva/vscode-extension/blob/dev/properties-bundle/vsc-extension/jas-plus-editor/images/important.png?raw=true)
+![important](https://github.com/amauri-silva/vscode-extension/blob/dev/properties-bundle/vsc-extension/jas-plus-editor/images/important.png?raw=true)
 
 
 
