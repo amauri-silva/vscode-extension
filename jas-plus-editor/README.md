@@ -32,7 +32,7 @@ All the parameters was put in alphabetical order.<br><br>
 
 **After**
 
-![properties organaized](https://github.com/amauri-silva/vscode-extension/blob/dev/properties-bundle/vsc-extension/jas-plus-editor/images/after_properties.png?raw=true)
+![properties organaized](https://github.com/amauri-silva/vscode-extension/blob/dev/properties-bundle/vsc-extension/jas-plus-editor/images/after.png?raw=true)
 
 
 
