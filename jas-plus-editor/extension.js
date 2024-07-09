@@ -167,7 +167,7 @@ function treatParameter(element) {
 		element = element.trim();
 	}
 	// TODO - There is a bug 
-	// element = putSpaceBetweenEqualSymbol(element);
+	element = putSpaceBetweenEqualSymbol(element);
 
 	return element;
 }
@@ -176,9 +176,36 @@ function treatParameter(element) {
  * @param {string} element
  */
 function putSpaceBetweenEqualSymbol(element) {
-	return element.split("=").join(" = ");
+
+	var element2 = findSpaceBeforeEqualSymbol(element);
+
+
+	return element2;
 }
 
+/**
+ * @param {string} element
+ */
+function findSpaceBeforeEqualSymbol(element) {
+
+	if( !(/\s+=/.test(element))){
+		element = element.split("=").join(" =");
+	}
+
+	if( !(/\s+=/.test(element)) || (/\s{2,}=/.test(element))){
+		element = element.split(/\s{2,}=/).join(" =");
+	}
+
+	if(!(/=\s+/.test(element))){
+		element = element.split("=").join("= ");
+	}
+
+	if(!(/=\s+/.test(element)) || ((/=\s{2,}/.test(element)))){
+		element = element.split(/=\s{2,}/).join("= ");
+	}
+
+	return element;
+}
 
 /**
  * Return a Map with a list of parameters that cotains comments
