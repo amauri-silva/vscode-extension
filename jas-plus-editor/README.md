@@ -1,7 +1,7 @@
 # Manage properties easily
 
 A resource bundle for [VS Code IDE](https://code.visualstudio.com/)<br>
-An easy alternantive to organaize all parameters in an alphabetical order.
+An easy alternative to organize all parameters in an alphabetical order.
 
 
 
