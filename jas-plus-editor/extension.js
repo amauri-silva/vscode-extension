@@ -43,6 +43,10 @@ function activate(context) {
 
 			//Get all line of hastag and group them by catagory
 			groupOfComments = hashtagRule(fullListOfParameters);
+			
+			//1 - Remove duplicate lines (only equals line)
+			fullListOfParameters = removeEqualLines(fullListOfParameters);
+			fullListOfParameters = removeParamWithEmptyValue(fullListOfParameters);
 
 			fullListOfParameters.sort();
 
@@ -50,7 +54,9 @@ function activate(context) {
 			var fullListOfParametersWithOutHastag = fullListOfParameters.filter(element => !element.startsWith("#") && !element.startsWith("//"))
 
 			fullListOfParametersWithOutHastag.forEach((element) => {
+				
 
+				//2 - treat groupOfParameter
 				const groupOfParameter = element.substring(0, element.indexOf("."));
 
 				if (mapOfParameters.has(groupOfParameter)) {
@@ -82,7 +88,7 @@ function activate(context) {
 				if (arrayParameter.length > 1) {
 					arrayParameter.forEach((element) => {
 
-						//get the intex of  =
+						//get the index of  =
 						currentIndexEquals = element.indexOf("=");
 
 						if (currentIndexEquals > maxEqualsIndex) {
@@ -166,7 +172,6 @@ function treatParameter(element) {
 	if (element.endsWith(" ")) {
 		element = element.trim();
 	}
-	// TODO - There is a bug 
 	element = putSpaceBetweenEqualSymbol(element);
 
 	return element;
@@ -236,6 +241,32 @@ function hashtagRule(listOfParameters) {
 	var mapOfHashTagByGroupSorted = new Map([...mapOfHashTagByGroup.entries()].sort());
 
 	return mapOfHashTagByGroupSorted;
+}
+
+/**
+ * @param {string[]} fullListOfParameters
+ */
+function removeEqualLines(fullListOfParameters){
+	return fullListOfParameters.filter((item,  index) => fullListOfParameters.indexOf(item) === index)
+}
+
+/**
+ * Remove parameter without Charactere =
+ * Remove parameter with white space and empty charactere after =
+ * @param {string[]} fullListOfParameters
+ */
+function removeParamWithEmptyValue(fullListOfParameters){
+	var fullListOfParametersFiltered = [];
+	const regex = /=\s*\S/;
+	
+	fullListOfParameters.filter(function (letter) {
+
+		if (letter.includes('=') && (regex.test(letter))){
+			fullListOfParametersFiltered.push(letter);
+		}
+	});
+
+	return fullListOfParametersFiltered;
 }
 
 module.exports = {
