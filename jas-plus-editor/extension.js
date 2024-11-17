@@ -44,8 +44,7 @@ function activate(context) {
 			//Get all line of hastag and group them by catagory
 			groupOfComments = hashtagRule(fullListOfParameters);
 			
-			//1 - Remove duplicate lines (only equals line)
-			fullListOfParameters = removeEqualLines(fullListOfParameters);
+			// Remove parameters with empty space or with white space
 			fullListOfParameters = removeParamWithEmptyValue(fullListOfParameters);
 
 			fullListOfParameters.sort();
@@ -130,6 +129,10 @@ function activate(context) {
 			var lastParam = "";
 			var arrayHashtag = [];
 			finalListParameters.sort();
+			
+			//Remove duplicate lines (only equals line)
+			finalListParameters = removeEqualLines(finalListParameters);
+
 			finalListParameters.forEach((parameter) => {
 				currentParam = parameter.substring(0, parameter.indexOf("="));
 				currentParam = currentParam.split(" ").join("");
